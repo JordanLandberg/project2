@@ -64,7 +64,7 @@ INSERT INTO question (question, category_id, status_id)
                 SELECT category_id FROM question_category WHERE category_name = 'HTML', 
                 SELECT status_id FROM question_status WHERE status_name = 'Approved');
 -- HTML ANSWERS
-INSERT INTO answer (answer,question_id)
+INSERT INTO answer (answer, question_id)
     VALUES  ('HyperText Markup Language',
                 SELECT question_id FROM question WHERE question = 'What is HTML?'),
             ('Hidden Token Middle Language',
@@ -225,7 +225,7 @@ INSERT INTO question (question, category_id, status_id)
                 SELECT category_id FROM question_category WHERE category_name = 'CSS',
                 SELECT status_id FROM question_status WHERE status_name = 'Approved'),
 -- CSS ANSWERS
-INSERT INTO answer (answer,question_id)
+INSERT INTO answer (answer, question_id)
     VALUES  ('Cascading Style Sheets',
                 SELECT question_id FROM question WHERE question = 'What does CSS stand for?'),
             ('Concealing Stable Sheets',
@@ -443,7 +443,7 @@ INSERT INTO question (question, category_id, status_id)
                 SELECT category_id FROM question_category WHERE category_name = 'JavaScript',
                 SELECT status_id FROM question_status WHERE status_name = 'Approved');
 -- JS ANSWERS
-INSERT INTO answer (answer,question_id)
+INSERT INTO answer (answer, question_id)
     VALUES  ('An object oriented programming language that is single-threaded and is a functional programming language',
                 SELECT question_id FROM question WHERE question = 'What is JavaScript?'),
             ('Helps make the site look better through the use of a style sheet',
@@ -624,7 +624,7 @@ INSERT INTO question (question, category_id, status_id)
                 SELECT category_id FROM question_category WHERE category_name = 'Algorithms',
                 SELECT status_id FROM question_status WHERE status_name = 'Approved');
 -- DATA STRUCTURE/ALGORITHMS ANSWERS
-INSERT INTO answer (answer,question_id)
+INSERT INTO answer (answer, question_id)
     VALUES  ('Different ways of organizing and storing data',
                SELECT question_id FROM question WHERE question = 'What are data structures?'),
             ('Different ways of storing and retrieving data',
@@ -806,7 +806,7 @@ INSERT INTO questions(question, category_id, status_id)
                 SELECT category_id FROM question_category WHERE category_name = 'Node',
                 SELECT status_id FROM question_status WHERE status_name = 'Approved');
 -- NODE ANSWERS
-INSERT INTO answer (answer,question_id)
+INSERT INTO answer (answer, question_id)
     VALUES  ('An open-source, cross-platform, runtime environment for JavaScript',
                 SELECT question_id FROM question WHERE question = 'What is node?'),
             ('A dynamic JavaScript IDE',
@@ -885,7 +885,7 @@ INSERT INTO question (question, category_id, status_id)
                 SELECT category_id FROM question_category WHERE category_name = 'Express',
                 SELECT status_id FROM question_status WHERE status_name = 'Approved')
 -- EXPRESS ANSWERS
-INSERT INTO answer (answer,question_id)
+INSERT INTO answer (answer, question_id)
     VALUES  ('It is a routing and middleware web framework',
                 SELECT question_id FROM question WHERE question = 'What is express?'),
             ('It is a JavaScript server',
@@ -972,7 +972,7 @@ INSERT INTO questions (question, category_id, status_id)
                 SELECT status_id FROM question_status WHERE status_name = 'Approved');
 
 -- REACT ANSWERS
-INSERT INTO answer (answer,question_id)
+INSERT INTO answer (answer, question_id)
     VALUES  
 
 -- REDUX QUESTIONS    
@@ -1002,5 +1002,68 @@ INSERT INTO questions (question, category_id, status_id)
                 SELECT category_id FROM question_category WHERE category_name = 'Redux',
                 SELECT status_id FROM question_status WHERE status_name = 'Approved'),
 -- REDUX ANSWERS
-INSERT INTO answer (answer,question_id)
+INSERT INTO answer (answer, question_id)
+    VALUES  
+
+-- JAVA QUESTIONS    
+INSERT INTO questions (question, category_id, status_id)
+    VALUES  ('What are the 4 Pillars of OOP?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('What is the difference between Abstraction and Encapsulation?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('Which of the following are not an example of Polymorphism?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('What is the difference between overloading and overriding?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('Can an abstract class can have concrete methods?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('What is Java?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('What does the iterator do?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('What is the difference between the = and == operators?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('How do you assign a value to a variable?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('What is the defualt type of variable used for decimals?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('Which of the following are not a primative data type?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('Which of the following are not a Wrapper class?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('Which of the following are not a part of the Collections API?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('The package naming conventions are:',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('Which of the following are not correct about the "final" keyword?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('The Object class provides all of the following methods except:',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('What are var args?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('All POJO''s are Java Beans but not all Java Beans are POJO''s',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
+            ('What is the main method signature?',
+                SELECT category_id FROM question_category WHERE category_name = 'Java',
+                SELECT status_id FROM question_status WHERE status_name = 'Approved');
+-- JAVA ANSWERS
+INSERT INTO answer (answer, question_id)
     VALUES  
