@@ -8,13 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user_role")
+@Table(name = "user_role")
 public class Role {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
-	private int roleId;
-	
-	@Column(name="role_name")
-	private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private int roleId;
+
+    @Column(name = "role_name")
+    private String name;
 }

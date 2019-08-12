@@ -8,13 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "question_category")
-public class Category {
+@Table(name = "question_status")
+public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
-    private int categoryId;
+    @Column(name = "status_id")
+    private int statusId;
 
-    @Column(name = "category_name")
-    private String categoryName;
+    @Column(name = "status_name")
+    private String statusName;
 }
