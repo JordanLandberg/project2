@@ -1,3 +1,4 @@
+import Question from "./question";
 
 export default class Answer {
     constructor(

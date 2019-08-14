@@ -27,6 +27,7 @@ export default class ViewUsersComponent extends Component<{}, IState> {
 
     render() {
         const users = this.state.users;
+        console.log(users[0])
         return (
             <div className="user-table container">
                 <br/>
@@ -52,11 +53,11 @@ export default class ViewUsersComponent extends Component<{}, IState> {
                             users.map(users =>
                                 <tr key={'userId-'+users.userId}>
                                     <td>{users.userId}</td>
-                                    <td>{users.username}</td>
+                                    <td>{users.email}</td>
                                     <td>{users.firstName}</td>
                                     <td>{users.lastName}</td>
-                                    <td>{users.email}</td>
-                                    <td>{users.role && users.role.role}</td>
+                                    <td>{users.phone}</td>
+                                    <td>{users.role && users.role.roleName}</td>
                                 </tr>)
                             }
                         </tbody>
