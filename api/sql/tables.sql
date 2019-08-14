@@ -1,3 +1,10 @@
+DROP TABLE app_user;
+DROP TABLE user_role;
+DROP TABLE question;
+DROP TABLE answer;
+DROP TABLE question_category;
+DROP TABLE question_status;
+
 CREATE TABLE user_role (
     role_id SERIAL PRIMARY KEY,
     role_name TEXT UNIQUE NOT NULL
@@ -9,7 +16,7 @@ CREATE TABLE app_user (
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
     phone TEXT NOT NULL,
-    role_id INTEGER UNIQUE NOT NULL REFERENCES user_role(role_id)
+    role_id INTEGER NOT NULL REFERENCES user_role(role_id)
 );
 
 CREATE TABLE question_category (
@@ -23,7 +30,7 @@ CREATE TABLE question_status (
 CREATE TABLE question (
     question_id SERIAL PRIMARY KEY,
     question TEXT UNIQUE NOT NULL,
-    correct_answer INTEGER,
+    correct_answer TEXT,
     category_id INTEGER NOT NULL REFERENCES question_category(category_id),
     status_id INTEGER NOT NULL REFERENCES question_status(status_id)
 );

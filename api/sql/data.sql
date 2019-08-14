@@ -3,20 +3,22 @@ INSERT INTO user_role (role_name)
             ('admin');
 
 INSERT INTO app_user (email, user_password, first_name, last_name, phone, role_id)
-    VALUES  ('jordanlandberg@gmail.com', 'password', 'Jordan', 'Landberg'
-                '(516)806-7753', SELECT role_id FROM user_role WHERE role_name='admin'),
-            ('abood.aqrab@hotmail.com', 'password', 'Abdulah', 'Aqrabawi'
-                '(951)215-1414', SELECT role_id FROM user_role WHERE role_name='admin'),
-            ('carrichka@yahoo.com', 'password', 'Carri', 'Martin'
-                '(303)916-0458', SELECT role_id FROM user_role WHERE role_name='admin'),
-            ('blake.kruppa@revature.com', 'pass', 'Blake', 'Kruppa'
-                '(587)364-9861', SELECT role_id FROM user_role WHERE role_name='admin'),
-            ('phongtran@gmail.com', 'password', 'Phong', 'Tran'
-                '(364)669-9753', SELECT role_id FROM user_role WHERE role_name='student'),
-            ('chrispy@magic.com', 'password', 'Chris', 'Prosser'
-                '(598)744-1258', SELECT role_id FROM user_role WHERE role_name='student'),
-            ('jboakye@ginyuforce.org', 'password', 'Joseph', 'Boakye'
-                '(635)257-1354', SELECT role_id FROM user_role WHERE role_name='student');
+    VALUES  ('jordanlandberg@gmail.com', 'password', 'Jordan', 'Landberg',
+                '(516)806-7753', (SELECT role_id FROM user_role WHERE role_name='admin')),
+            ('abood.aqrab@hotmail.com', 'password', 'Abdulah', 'Aqrabawi',
+                '(951)215-1414', (SELECT role_id FROM user_role WHERE role_name='admin')),
+            ('carrichka@yahoo.com', 'password', 'Carri', 'Martin',
+                '(303)916-0458', (SELECT role_id FROM user_role WHERE role_name='admin')),
+            ('yosuke.kibe@yosuke.com', 'password', 'Yosuke', 'Kibe',
+                '(123)1578-9523', (SELECT role_id FROM user_role WHERE role_name='admin')),
+            ('blake.kruppa@revature.com', 'pass', 'Blake', 'Kruppa',
+                '(587)364-9861', (SELECT role_id FROM user_role WHERE role_name='admin')),
+            ('phongtran@gmail.com', 'password', 'Phong', 'Tran',
+                '(364)669-9753', (SELECT role_id FROM user_role WHERE role_name='student')),
+            ('chrispy@magic.com', 'password', 'Chris', 'Prosser',
+                '(598)744-1258', (SELECT role_id FROM user_role WHERE role_name='student')),
+            ('jboakye@ginyuforce.org', 'password', 'Joseph', 'Boakye',
+                '(635)257-1354', (SELECT role_id FROM user_role WHERE role_name='student'));
 
 INSERT INTO question_category (category_name)
     VALUES  ('HTML'), ('CSS'), ('JavaScript'), ('React'), ('Redux'), ('SQL'), ('pgAdmin'), 
@@ -26,8 +28,9 @@ INSERT INTO question_status (status_name)
     VALUES ('Pending'), ('Approved'), ('Denied');
 
 -- HTML QUESTIONS
-INSERT INTO question (question, category_id, status_id)
-    VALUES  ('What is HTML?', 
+INSERT INTO question (question, correct_answer, category_id, status_id)
+    VALUES  ('What is HTML?', --done
+                'HyperText Markup Language',
                 SELECT category_id FROM question_category WHERE category_name = 'HTML', 
                 SELECT status_id FROM question_status WHERE status_name = 'Approved'),
             ('What is an element?', 
@@ -65,9 +68,7 @@ INSERT INTO question (question, category_id, status_id)
                 SELECT status_id FROM question_status WHERE status_name = 'Approved');
 -- HTML ANSWERS
 INSERT INTO answer (answer, question_id)
-    VALUES  ('HyperText Markup Language',
-                SELECT question_id FROM question WHERE question = 'What is HTML?'),
-            ('Hidden Token Middle Language',
+    VALUES  ('Hidden Token Middle Language',
                 SELECT question_id FROM question WHERE question = 'What is HTML?'),
             ('Hyperlinks and Text Markup Language',
                 SELECT question_id FROM question WHERE question = 'What is HTML?'),
@@ -1002,68 +1003,5 @@ INSERT INTO questions (question, category_id, status_id)
                 SELECT category_id FROM question_category WHERE category_name = 'Redux',
                 SELECT status_id FROM question_status WHERE status_name = 'Approved'),
 -- REDUX ANSWERS
-INSERT INTO answer (answer, question_id)
-    VALUES  
-
--- JAVA QUESTIONS    
-INSERT INTO questions (question, category_id, status_id)
-    VALUES  ('What are the 4 Pillars of OOP?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('What is the difference between Abstraction and Encapsulation?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('Which of the following are not an example of Polymorphism?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('What is the difference between overloading and overriding?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('Can an abstract class can have concrete methods?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('What is Java?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('What does the iterator do?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('What is the difference between the = and == operators?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('How do you assign a value to a variable?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('What is the defualt type of variable used for decimals?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('Which of the following are not a primative data type?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('Which of the following are not a Wrapper class?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('Which of the following are not a part of the Collections API?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('The package naming conventions are:',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('Which of the following are not correct about the "final" keyword?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('The Object class provides all of the following methods except:',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('What are var args?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('All POJO''s are Java Beans but not all Java Beans are POJO''s',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved'),
-            ('What is the main method signature?',
-                SELECT category_id FROM question_category WHERE category_name = 'Java',
-                SELECT status_id FROM question_status WHERE status_name = 'Approved');
--- JAVA ANSWERS
 INSERT INTO answer (answer, question_id)
     VALUES  
