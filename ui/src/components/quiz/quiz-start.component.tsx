@@ -6,7 +6,7 @@ import {
 
 interface IState {
     selectedAnswer: {
-        answerId: number,
+        answer: string,
         questionId: number
     }
 
@@ -20,7 +20,7 @@ export default class QuizStartComponent extends Component<{}, IState>  {
         super(props);
         this.state = {
             selectedAnswer: {
-                answerId: 1,
+                answer: '',
                 questionId: 1
             }
         }
@@ -31,7 +31,7 @@ export default class QuizStartComponent extends Component<{}, IState>  {
             ...this.state,
             selectedAnswer: {
                 ...this.state.selectedAnswer,
-                answerId: +event.target.value
+                answer: event.target.title
             },
             successMessage: `You're right!`
         })
@@ -55,11 +55,11 @@ export default class QuizStartComponent extends Component<{}, IState>  {
                         <p className="success-message">{this.state.successMessage}</p>
                         <Row>
                             <Col>
-                                <div onClick={() => this.answerSelection}>
                                     <Card className="answer1" body inverse >
+                                <button className="answer1" onClick={() => this.answerSelection} value="A composite key">
                                         <CardText>A composite key</CardText>
+                                </button>
                                     </Card>
-                                </div>
                             </Col>
                             <Col>
                                 <div>
