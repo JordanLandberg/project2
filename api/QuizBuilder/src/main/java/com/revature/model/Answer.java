@@ -15,8 +15,7 @@ public class Answer {
     @Column(name = "answer_id")
     private int answerId;
 
-    @Column(name = "answer")
-    private String answerNumber;
+    private String answer;
 
     @ManyToOne
     @JoinColumn(name = "question_id")
