@@ -4,51 +4,103 @@ import {
     Container, Row, Col
 } from 'reactstrap';
 
-export default class QuizStartComponent extends Component {
+interface IState {
+    selectedAnswer: {
+        answerId: number,
+        questionId: number
+    }
+
+    successMessage?: string
+}
+
+
+export default class QuizStartComponent extends Component<{}, IState>  {
+
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            selectedAnswer: {
+                answerId: 1,
+                questionId: 1
+            }
+        }
+    }
+
+    answerSelection = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            ...this.state,
+            selectedAnswer: {
+                ...this.state.selectedAnswer,
+                answerId: +event.target.value
+            },
+            successMessage: `You're right!`
+        })
+    }
+
+    submit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+    }
+
     render() {
         return (
-            <Container>
-                <div>
-                    <Card body inverse color="primary">
-                        <h1><CardTitle>Question #1</CardTitle></h1>
-                        <h3><CardText>What do we call a primary key that consists of multiple columns in a table?</CardText></h3>
-                    </Card>
-                    <br></br>
-                    <Row>
-                        <Col>
-                            <Card body inverse style={{ backgroundColor: '#BD9FD6'}}>
-                                <Button><CardText>A composite key</CardText></Button>
-                            </Card>
-                        </Col>
-                        <Col>
-                            <Card body inverse color="success">
-                                <Button><CardText>A primary key</CardText></Button>
-                            </Card>
-                        </Col>
-                    </Row>
-                    <br></br>
-                    <Row>
-                        <Col>
-                            <Card body inverse color="info">
-                                <Button><CardText>A foreign key</CardText></Button>
-                            </Card>
-                        </Col>
-                        <Col>
-                            <Card body inverse color="warning">
-                                <Button><CardText>A friendly key</CardText></Button>
-                            </Card>
-                        </Col>
-                    </Row>
-                </div>
-                <br></br>
-                <Row>
-                    <Col>
-                        <Button color="info">Submit Answer</Button>
-                    </Col>
-                    <Button color="info">Next</Button>
-                </Row>
+            <form className="form-quizquestion" onSubmit={this.submit}>
+                <Container>
+                    <div>
+                        <Card className="question" body inverse>
+                            <h1><CardTitle>Question #1</CardTitle></h1>
+                            <h3><CardText>What do we call a primary key that consists of multiple columns in a table?</CardText></h3>
+                        </Card>
+                        <br></br>
+                        <p className="success-message">{this.state.successMessage}</p>
+                        <Row>
+                            <Col>
+                                <div onClick={() => this.answerSelection}>
+                                    <Card className="answer1" body inverse >
+                                        <CardText>A composite key</CardText>
+                                    </Card>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div>
+                                    <Card className="answer2" body inverse>
+                                        <CardText>A primary key</CardText>
+                                    </Card>
+                                </div>
+                            </Col>
+                        </Row>
+                        <br></br>
+                        <Row>
+                            <Col>
+                                <div>
+                                    <Card className="answer3" body inverse>
+                                        <CardText>A foreign key</CardText>
+                                    </Card>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div>
+                                    <Card className="answer4" body inverse>
+                                        <CardText>A friendly key</CardText>
+                                    </Card>
+                                </div>
+                            </Col>
+                        </Row>
 
-            </Container>
+                    </div>
+                    <br></br>
+                    <Row>
+                        <Col xs="6" sm="4"></Col>
+                        <Col xs="6" sm="4">
+                            <Button color="info">Submit Answer</Button>
+                        </Col>
+                        <Col xs="6" sm="4">
+                            <Button color="info">Next</Button>
+                        </Col>
+                    </Row>
+
+                </Container>
+            </form >
         );
     };
 }
