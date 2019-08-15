@@ -17,7 +17,7 @@ export default class QuizMiddleComponent extends Component{
                   <br></br>
                 <Row>
                     <Col>
-                  <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
+                  <Card body inverse style={{ backgroundColor: '#BD9FD6', borderColor: '#333' }}>
                     <CardText>A composite key</CardText>
                     <Button>Button</Button>
                   </Card>
