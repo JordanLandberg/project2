@@ -20,22 +20,22 @@ export default class NavbarComponent extends Component {
                             <div className="nav-link dropdown-toggle pointer" id="examples-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</div>
                             <div className="dropdown-menu" aria-labelledby="examples-dropdown">
                                 <div className="dropdown-item"><h6>Front-End</h6></div>
-                                <div className="dropdown-divider"></div>
+                                    <div className="dropdown-divider"></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">HTML</Link></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">CSS</Link></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">JavaScript</Link></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">React</Link></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">Redux</Link></div>
-                                <div className="dropdown-divider"></div>
+                                    <div className="dropdown-divider"></div>
                                 <div className="dropdown-item"><h6>Back-End</h6></div>
-                                <div className="dropdown-divider"></div>
+                                    <div className="dropdown-divider"></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">Node</Link></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">Express</Link></div>
-                                <div className="dropdown-divider"></div>
+                                    <div className="dropdown-divider"></div>
                                 <div className="dropdown-item"><h6>Data Structures/Algorithms</h6></div>
-                                <div className="dropdown-divider"></div>
+                                    <div className="dropdown-divider"></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">Data Structures/Algorithms</Link></div>
-                                <div className="dropdown-divider"></div>
+                                    <div className="dropdown-divider"></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">All Categories</Link></div>
                             </div>
                         </li>
