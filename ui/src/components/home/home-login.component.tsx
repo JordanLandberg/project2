@@ -1,104 +1,88 @@
 import React from 'react';
 
-interface ISignInState {
-  username: string;
-  password: string;
-  errorMessage: string;
+import { RouteComponentProps } from 'react-router';
+
+interface IState {
+    credentials: {
+        email: string,
+        password: string
+    },
+    errorMessage?: string
 }
 
-export default class HomeLoginComponent extends React.Component<any, ISignInState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-      errorMessage: ''
-    };
-  }
+export  default class SignIn extends React.Component<RouteComponentProps, IState> {
 
-  submit = async (event: { preventDefault: () => void; }) => {
-    event.preventDefault();
-    console.log('attempting to login');
-    const credentials = {
-      username: this.state.username,
-      password: this.state.password
-    };
-
-    try {
-      const resp = await fetch('http://localhost:8012/login', {
-        method: 'POST',
-        credentials: 'include',
-        body: JSON.stringify(credentials),
-        headers: {
-          'content-type': 'application/json'
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            credentials: {
+                email: '',
+                password: ''
+            }
         }
-      })
-      console.log(resp);
+    }
 
-      if (resp.status === 401) {
+    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const name = event.target.name;
         this.setState({
-          errorMessage: 'Invalid Credentials'
+            credentials: {
+                ...this.state.credentials,
+                [name]: event.target.value
+            }
         });
-      } else if (resp.status === 200) {
-        // redirect to spaceships page
-        // const user = await resp.json();
-        this.props.history.push('/home');
-      } else {
-        this.setState({
-          errorMessage: 'Cannot Login At This Time'
-        });
-      }
-    } catch (err) {
-      console.log(err);
+    }
+    
+    submit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        try {
+            const resp = await fetch('http://localhost:8012/login' ,{
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(this.state.credentials),
+                headers: {
+                    'content-type': 'application/json'
+                }
+            });
+            const user = await resp.json();
+            console.log(user);
+    
+            localStorage.setItem('user', JSON.stringify(user));
+            this.props.history.push('/home'); // navigate pages
+        } catch (err) {
+            console.log(err);
+            console.log('invalid credentials');
+            this.setState({
+                errorMessage: 'Invalid Credentials'
+            });
+        }
+    }
+
+    render() {
+        return (
+            <form className="form-signin" onSubmit={this.submit} >
+                <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                <label htmlFor="inputemail" className="sr-only">email</label>
+                <input type="text" id="inputemail" 
+                    name="email"
+                    className="form-control"
+                    placeholder="email" 
+                    onChange={this.handleChange}
+                    value={this.state.credentials.email} required />
+                <label htmlFor="inputPassword" className="sr-only">Password</label>
+                <input type="password" id="inputPassword" 
+                    name="password"
+                    className="form-control" 
+                    placeholder="Password"
+                    onChange={this.handleChange}
+                    value={this.state.credentials.password} required />
+                {this.state.errorMessage && <p id="error-message">{this.state.errorMessage}</p>}
+                
+                <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+              
+                <a className="btn btn-lg btn-primary btn-block" href="/home/register" >registr</a>
+         
+                <p className="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+            </form>
+        );
     }
   }
-
-  updateUsername = (event: { target: { value: string; }; }) => {
-    this.setState({
-      username: event.target.value
-    });
-  }
-
-  updatePassword = (event: { target: { value: string; }; }) => {
-    this.setState({
-      password: event.target.value
-    })
-  }
-
-  render() {
-    const { username, password, errorMessage } = this.state;
-    return (
-      <div id = "form">
-      <form className="form-signin" onSubmit={this.submit}>
-        <h1 id = "top left" className="h3 mb-3 font-weight-normal">Sign In</h1>
-        <label htmlFor="inputUsername" className="sr-only">Username</label>
-        <input type="text" id="inputUsername" name="username"
-          className="form-control" placeholder="Username"
-          required value={username} onChange={this.updateUsername} />
-        
-        <label htmlFor="inputPassword" className="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="password"
-          className="form-control" placeholder="Password"
-          required value={password} onChange={this.updatePassword} />
-
-        <button id = "but" className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <button id = "but" className="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-        <p id="login-error">{errorMessage}</p>
-      </form>
-      
-        <form className="form-paragraph">
-          <p>Hello me and abed :)</p>
-        </form>
-    
-      
-
-      </div>
-
-    
-
-    );
-
-
-
-  }
-}
