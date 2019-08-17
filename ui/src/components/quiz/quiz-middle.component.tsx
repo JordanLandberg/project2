@@ -60,7 +60,6 @@ export default class QuizMiddleComponent extends Component {
                         <Button color="info">Next</Button>
                     </Col>
                 </Row>
-
             </Container>
         );
     };
