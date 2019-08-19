@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,12 +23,17 @@ public class QuestionController {
 	
 	
 	@GetMapping("/category/{categoryName}")
-	public List<Question> findById(@PathVariable String categoryName) {
+	public List<Question> findByCategoryName(@PathVariable String categoryName) {
 		return qs.findByCategory(categoryName);
 	}
 	
+	@PutMapping
+	public Question updateQuestion(@RequestBody Question updatedQuestion) {
+		return qs.updateQuestion(updatedQuestion);
+	}
+	
 	@PostMapping
-	public Question createUser(@RequestBody Question newQuestion) {
-		return qs.createUser(newQuestion);
+	public Question createQuestion(@RequestBody Question newQuestion) {
+		return qs.createQuestion(newQuestion);
 	}
 }
