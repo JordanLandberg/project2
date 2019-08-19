@@ -22,6 +22,7 @@ public class UserService {
 
 	public List<User> findAll() {
 		return ur.findAllByOrderByUserIdAsc();
+	
 	}
 	
 	public User findById(int userId) {

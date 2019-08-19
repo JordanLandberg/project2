@@ -1,6 +1,9 @@
-package com.revature.controllers;
+	package com.revature.controllers;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,23 +24,35 @@ public class UserController {
 	@Autowired
 	private UserService us;
 	
+	
+	// made sess
 	@GetMapping
-	public List<User> findAll() {
+	public List<User> findAll(HttpSession sess) {
+		if (sess.getAttribute("user") !=null)
 		return us.findAll();
+		
+			return null;
+		
 	}
 	
 	@GetMapping("/{id}")
-	public User findById(@PathVariable int id) {
+	public User findById(@PathVariable int id, HttpSession sess) {
+		if (sess.getAttribute("user") !=null)
 		return us.findById(id);
+		return null;
 	}
 	
-	@PutMapping
-	public User updateUser(@RequestBody User updatedUser) {
+	@PutMapping(produces= {"application/json"})
+	public User updateUser(@RequestBody User updatedUser, HttpSession sess) {
+		if (sess.getAttribute("user") !=null)
 		return us.updateUser(updatedUser);
+		 return null;
 	}
 	
-	@PostMapping
+	@PostMapping(produces= {"application/json"})
 	public User createUser(@RequestBody User newUser) {
+		
+		
 		return us.createUser(newUser);
 	}
 }
