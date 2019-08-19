@@ -26,6 +26,19 @@ export default class QuizStartComponent extends Component<{}, IState>  {
         }
     }
 
+    componentDidMount = async () => {
+
+        // this.getQuestions();
+
+    }
+
+    getQuestions = async() => {
+        // let resp = await questionClient.get(`/quiz}`)
+        // this.setState({
+        //     questions: resp.data.content,
+        // });
+    }
+
     answerSelection = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             ...this.state,
@@ -55,15 +68,15 @@ export default class QuizStartComponent extends Component<{}, IState>  {
                         <p className="success-message">{this.state.successMessage}</p>
                         <Row>
                             <Col>
-                                    <Card className="answer1" body inverse >
-                                <button className="answer1" onClick={() => this.answerSelection} value="A composite key">
-                                        <CardText>A composite key</CardText>
-                                </button>
-                                    </Card>
+                                <Card className="answer1 clickable" 
+                                    // onClick={(this.answerSelection)} 
+                                    body inverse >
+                                    <CardText>A composite key</CardText>
+                                </Card>
                             </Col>
                             <Col>
                                 <div>
-                                    <Card className="answer2" body inverse>
+                                    <Card className="answer2 clickable" body inverse>
                                         <CardText>A primary key</CardText>
                                     </Card>
                                 </div>
@@ -73,14 +86,14 @@ export default class QuizStartComponent extends Component<{}, IState>  {
                         <Row>
                             <Col>
                                 <div>
-                                    <Card className="answer3" body inverse>
+                                    <Card className="answer3 clickable" body inverse>
                                         <CardText>A foreign key</CardText>
                                     </Card>
                                 </div>
                             </Col>
                             <Col>
                                 <div>
-                                    <Card className="answer4" body inverse>
+                                    <Card className="answer4 clickable" body inverse>
                                         <CardText>A friendly key</CardText>
                                     </Card>
                                 </div>
