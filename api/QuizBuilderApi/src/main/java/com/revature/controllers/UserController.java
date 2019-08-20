@@ -22,15 +22,13 @@ public class UserController {
 	
 	@Autowired
 	private UserService us;
-	
-	
-	// made sess
+
 	@GetMapping
 	public List<User> findAll(HttpSession sess) {
-		if (sess.getAttribute("user") !=null)
+//		if (sess.getAttribute("user") !=null)
 		return us.findAll();
 		
-			return null;
+//			return null;
 		
 	}
 	

@@ -16,15 +16,11 @@ import com.revature.services.UserService;
 @RestController
 public class AuthController {
 
-	private HttpSession sess;
-
 	@Autowired
 	private UserService us;
 
 	@PostMapping("/login")
 	public User login(@RequestBody Credential cred, HttpServletRequest req) {
-		sess = req.getSession();
-		sess.setAttribute("user", cred.getEmail());
 		return us.login(cred);
 	}
 
