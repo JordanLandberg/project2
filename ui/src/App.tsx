@@ -16,6 +16,8 @@ import QuizSectionComponent from './components/quiz/quiz-section.component';
 import QuizStartComponent from './components/quiz/quiz-start.component';
 import ViewUsersComponent from './components/user/view-users.component';
 
+//import { userInfo } from 'os';
+
 
 const App: React.FC = () => {
     return (
@@ -28,7 +30,7 @@ const App: React.FC = () => {
                     <Switch>
                         <Route path="/categories" component={CategoriesComponent} />
                         <Route path="/home/login" component={HomeLoginComponent} />
-                        <Route path="/home/signup" component={HomeSignupComponent} />
+                        <Route path="/home/register" component={HomeSignupComponent} />
                         <Route path="/question/create" component={CreateQuestionComponent} />
                         <Route path="/quiz/end" component={QuizEndComponent} />
                         <Route path="/quiz/middle" component={QuizMiddleComponent} />
