@@ -1,4 +1,4 @@
-	package com.revature.controllers;
+package com.revature.controllers;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import com.revature.services.UserService;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-	
+
 	@Autowired
 	private UserService us;
 
@@ -27,29 +27,27 @@ public class UserController {
 	public List<User> findAll(HttpSession sess) {
 //		if (sess.getAttribute("user") !=null)
 		return us.findAll();
-		
+
 //			return null;
-		
+
 	}
-	
+
 	@GetMapping("/{id}")
 	public User findById(@PathVariable int id, HttpSession sess) {
-		if (sess.getAttribute("user") !=null)
+//		if (sess.getAttribute("user") !=null)
 		return us.findById(id);
-		return null;
+//		return null;
 	}
-	
-	@PutMapping(produces= {"application/json"})
+
+	@PutMapping(produces = { "application/json" })
 	public User updateUser(@RequestBody User updatedUser, HttpSession sess) {
-		if (sess.getAttribute("user") !=null)
+//		if (sess.getAttribute("user") !=null)
 		return us.updateUser(updatedUser);
-		 return null;
+//		 return null;
 	}
-	
-	@PostMapping(produces= {"application/json"})
+
+	@PostMapping(produces = { "application/json" })
 	public User createUser(@RequestBody User newUser) {
-		
-		
 		return us.createUser(newUser);
 	}
 }
