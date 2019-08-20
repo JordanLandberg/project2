@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import QBLogo from '../../assets/QB-logo2.png';
 
 export default class NavbarComponent extends Component {
     render() {
         return (
             <nav className="navbar navbar-toggleable-md navbar-expand-lg navbar-light bg-light display-front nav-pad">
                 <div className="navbar-header c-pointer shift-left">
-                    <Link to="/home/login" className="unset-anchor">Logo Image</Link>
+                    <Link to="/home/login" className="unset-anchor">
+                        <img className="img-adjust-position qb-logo" src={QBLogo} alt="quizbuilder" />
+                    </Link>
+                    
                 </div>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -24,8 +28,6 @@ export default class NavbarComponent extends Component {
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">HTML</Link></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">CSS</Link></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">JavaScript</Link></div>
-                                <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">React</Link></div>
-                                <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">Redux</Link></div>
                                 <div className="dropdown-divider"></div>
                                 <div className="dropdown-item"><h6>Back-End</h6></div>
                                 <div className="dropdown-divider"></div>
@@ -36,7 +38,7 @@ export default class NavbarComponent extends Component {
                                 <div className="dropdown-divider"></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">Data Structures/Algorithms</Link></div>
                                 <div className="dropdown-divider"></div>
-                                <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">All Categories</Link></div>
+                                <div className="dropdown-item"><Link to="/categories" className="unset-anchor nav-link active">All Categories</Link></div>
                             </div>
                         </li>
                         <li className="nav-item active dropdown">

@@ -33,8 +33,29 @@ body {
 }
 
 /*****************************
-    NavBar
+    Quiz
 *****************************/
+.clickable {
+  cursor: pointer;
+}
+.question {
+  background: rgb(86, 114, 88);
+}
+.answer1 {
+  background: rgb(160, 44, 255);
+}
+.answer2 {
+  background: rgb(0, 179, 9);
+}
+.answer3 {
+  background: rgb(214, 139, 0);
+}
+.answer4 {
+  background: rgb(255, 0, 0);
+}
+.answer5 {
+  background: rgb(0, 26, 255);
+}
 
 /*****************************
     sign in
@@ -77,4 +98,16 @@ body {
   left: 10px;
   padding: 50px;
 
+}
+
+/*****************************
+
+  NAV
+
+*****************************/
+
+.qb-logo {
+  width: auto;
+  height: 50px;
+  margin-right: 2em;
 }
