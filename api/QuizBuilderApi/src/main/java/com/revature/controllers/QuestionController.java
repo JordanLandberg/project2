@@ -21,12 +21,12 @@ public class QuestionController {
 	private QuestionService qs;
 	
 	
-	@GetMapping("/category/{categoryName}")
+	@GetMapping(value="/{categoryName}" , consumes = "application/json")
 	public List<Question> findById(@PathVariable String categoryName) {
 		return qs.findByCategory(categoryName);
 	}
 	
-	@PostMapping
+	@PostMapping ( produces = "application/json")
 	public Question createUser(@RequestBody Question newQuestion) {
 		return qs.createUser(newQuestion);
 	}

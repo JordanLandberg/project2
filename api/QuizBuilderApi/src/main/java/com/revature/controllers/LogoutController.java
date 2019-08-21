@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogoutController {
 
 // made the logout
-	@GetMapping 
+	@GetMapping
 	public String logout(HttpSession sess) {
 	sess.invalidate();
 	return "redirect:localhost:8012/login" ;

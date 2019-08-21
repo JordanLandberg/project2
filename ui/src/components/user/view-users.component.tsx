@@ -16,8 +16,9 @@ export default class ViewUsersComponent extends Component<{}, IState> {
     }
 
     async componentDidMount() {
-        const resp = await fetch('http://localhost:8012/users', {
-            credentials: 'include'
+        const resp = await fetch('http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/users', {
+            method: 'GET',   
+        credentials: 'include'
         });
         const users = await resp.json();
         this.setState({
@@ -57,7 +58,7 @@ export default class ViewUsersComponent extends Component<{}, IState> {
                                     <td>{users.firstName}</td>
                                     <td>{users.lastName}</td>
                                     <td>{users.phone}</td>
-                                    <td>{users.role && users.role.roleName}</td>
+                                    <td>{users.role.roleName && users.role.roleId}</td>
                                 </tr>)
                             }
                         </tbody>
@@ -68,3 +69,6 @@ export default class ViewUsersComponent extends Component<{}, IState> {
         )
     }
 }
+
+
+

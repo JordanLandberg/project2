@@ -15,7 +15,7 @@ interface IState {
         firstName: string,
         lastName: string,
         phone:string,
-        role:  Role 
+        role:  Role
        
         
     },
@@ -28,18 +28,18 @@ export  default class register extends React.Component<RouteComponentProps, ISta
         super(props);
         this.state = {
             credentials: {
-                userId:432,
+                userId: 0,
                 email: '',
                 password: '',
                 firstName: '',
                 lastName: '',
                 phone:'',
-               
-                role: {
-                    roleId: 0,
-                    roleName: ''
-                }
+               role: {
 
+                roleId:1,
+                roleName:''
+               }
+            
             }
           
         }
@@ -58,7 +58,7 @@ export  default class register extends React.Component<RouteComponentProps, ISta
     submit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const resp = await fetch('http://localhost:8012/users' ,{
+            const resp = await fetch('http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/users' ,{
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(this.state.credentials),
@@ -119,7 +119,7 @@ export  default class register extends React.Component<RouteComponentProps, ISta
                     onChange={this.handleChange}
                     value={this.state.credentials.phone} required />
 
-<label htmlFor="inputemail" className="sr-only">roleName</label>
+{/* <label htmlFor="inputemail" className="sr-only">roleName</label>
                 <input type="text" id="inputemail" 
                     name="role"
                     className="form-control"
@@ -129,7 +129,7 @@ export  default class register extends React.Component<RouteComponentProps, ISta
 
 
 
-
+ */}
 
 
 
@@ -141,10 +141,11 @@ export  default class register extends React.Component<RouteComponentProps, ISta
                     onChange={this.handleChange}
                     value={this.state.credentials.password} required />
                 {this.state.errorMessage && <p id="error-message">{this.state.errorMessage}</p>}
-                <button className="btn btn-lg btn-primary btn-block" type="submit">register</button>
+                <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                <a className="btn btn-lg btn-primary btn-block" href="/home/login" >Back To login</a>
               
-  
-                <p className="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+{/*   
+                <p className="mt-5 mb-3 text-muted">&copy; 2017-2019</p> */}
             </form>
         );
     }

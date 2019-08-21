@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 export default class NavbarComponent extends Component {
     render() {
         return (
+        
             <nav className="navbar navbar-toggleable-md navbar-expand-lg navbar-light bg-light display-front nav-pad">
                 <div className="navbar-header c-pointer shift-left">
                     <Link to="/home/login" className="unset-anchor">Logo Image</Link>
@@ -44,6 +45,7 @@ export default class NavbarComponent extends Component {
                             <div className="dropdown-menu" aria-labelledby="examples-dropdown">
                                 <div className="dropdown-item"><Link to="/admin/users" className="unset-anchor nav-link active">View Users</Link></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">Review Questions</Link></div>
+                                <div className="dropdown-item"><Link to="/user/update" className="unset-anchor nav-link active">Update User</Link></div>
                             </div>
                         </li>
                         <li className="nav-item active">
@@ -52,6 +54,12 @@ export default class NavbarComponent extends Component {
                         <li className="nav-item active">
                             <Link to="/home/login" className="unset-anchor nav-link">
                                 <button className="btn btn-secondary btn-info btn-custom">Log In</button>
+                            </Link>
+                        </li>
+                        
+                        <li className="nav-item active">
+                            <Link to="/home/login" className="unset-anchor nav-link">
+                                <button className="btn btn-secondary btn-info btn-custom">Log out</button>
                             </Link>
                         </li>
                     </ul>
