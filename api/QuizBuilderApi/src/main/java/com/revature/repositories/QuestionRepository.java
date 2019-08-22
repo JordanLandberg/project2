@@ -10,7 +10,7 @@ import com.revature.models.Question;
 
 public interface QuestionRepository extends JpaRepository<Question, Integer>{
 
-	@Query(value="FROM Question q WHERE q.categoryId.categoryName =  :categoryName ORDER BY RAND()")
+	@Query(value="FROM Question q WHERE q.categoryId.categoryName =  :categoryName AND q.statusId.statusId = 2 ORDER BY RAND()")
 	List<Question> findRandomQuestions(String categoryName, Pageable amount);
 	
 }
