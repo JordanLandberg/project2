@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,11 @@ public class QuestionController {
 	@GetMapping("/category/{categoryName}/amount/{pageAmount}")
 	public Page<Question> findByCategoryName(@PathVariable String categoryName, @PathVariable int pageAmount) {
 		return qs.findByCategory(categoryName, pageAmount);
+	}
+	
+	@GetMapping("/status/{statusName}")
+	public List<Question> findByStatusIdStatusName(@PathVariable String statusName) {
+		return qs.findByStatusIdStatusName(statusName);
 	}
 	
 	@PutMapping
