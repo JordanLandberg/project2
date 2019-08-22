@@ -5,10 +5,7 @@ interface IState {
     quiz: any[],
     pageNumber: number,
     currentAnswers: any[],
-    a1: boolean,
-    a2: boolean,
-    a3: boolean,
-    a4: boolean
+    message?: string
 }
 
 
@@ -19,11 +16,7 @@ export default class QuizStartComponent extends Component<{}, IState>  {
         this.state = {
             quiz: [],
             pageNumber: 1,
-            currentAnswers: [],
-            a1: false,
-            a2: false,
-            a3: false,
-            a4: false
+            currentAnswers: []
         }
     }
 
@@ -143,7 +136,6 @@ export default class QuizStartComponent extends Component<{}, IState>  {
     selectedAnswer = (answers: any, answerNumber: number, pageNumber: number) => {
         let quiz = this.state.quiz;
         quiz[pageNumber].selectedAnswer = answers[answerNumber].answerId;
-        // console.log(quiz)
         this.setState({
             quiz
         })
@@ -239,10 +231,13 @@ export default class QuizStartComponent extends Component<{}, IState>  {
         let checkQuiz = this.state.quiz[this.state.pageNumber - 1];
         let selectedAnswer = checkQuiz && this.state.quiz[this.state.pageNumber - 1].selectedAnswer
         if (selectedAnswer === (checkQuiz && (checkQuiz.question && checkQuiz.question.correctAnswer.answerId))) {
-            console.log('heyhey');
+            this.setState({
+                message: 'Correct Answer!'
+            })
         } else {
-            console.log('youyou');
-        }
+            this.setState({
+                message: 'Incorrect Answer!'
+            })        }
         return undefined;
     }
 
@@ -298,10 +293,11 @@ export default class QuizStartComponent extends Component<{}, IState>  {
                                     </Col>
                                 </Row>
                             </div>
+                            <br/>
                             <Row>
                                 <Col xs="6" sm="4"></Col>
                                 <Col xs="6" sm="4">
-                                    <p></p>
+                                    <h3>{this.state.message}</h3>
                                 </Col>
                                 <Col xs="6" sm="4"></Col>
                             </Row>
