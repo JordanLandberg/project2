@@ -26,7 +26,7 @@ public class UserService {
 	}
 	
 	public User findById(int userId) {
-		return ur.findUserByUserId(userId);
+		return ur.getOne(userId);
 	}
 
 	@Transactional
