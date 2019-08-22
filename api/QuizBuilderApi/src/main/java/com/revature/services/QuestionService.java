@@ -18,7 +18,11 @@ public class QuestionService {
 		return qr.findByCategoryIdCategoryName(categoryName);
 	}
 
-	public Question createUser(Question newQuestion) {
+	public Question createQuestion(Question newQuestion) {
 		return qr.saveAndFlush(newQuestion);
+	}
+
+	public Question updateQuestion(Question updatedQuestion) {
+		return qr.saveAndFlush(updatedQuestion);
 	}
 }
