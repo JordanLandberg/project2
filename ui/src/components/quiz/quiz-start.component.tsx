@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { Button, Card, CardText, CardTitle, Col, Container, Row } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { IQuizState, IState } from '../../reducers';
+import { connect } from 'react-redux';
 
-interface IState {
+interface IQuizStartState {
     quiz: any[],
     pageNumber: number,
-    currentAnswers: any[],
-    message?: string
+    currentAnswers: any[]
+}
+
+export interface ICategoryProps {
+    category: IQuizState
 }
 
 
-export default class QuizStartComponent extends Component<{}, IState>  {
+export class QuizStartComponent extends Component<ICategoryProps, IQuizStartState>  {
 
     constructor(props: any) {
         super(props);
@@ -21,101 +27,17 @@ export default class QuizStartComponent extends Component<{}, IState>  {
     }
 
     async componentDidMount() {
-        // const categoryName = 'HTML';
-        //     const resp = await fetch(`http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/questions/category/${categoryName}`, {
-        //         credentials: 'include'
-        //     });
-        //     const questionsFromServer = await resp.json();
-        const questionsFromServer = // hardcoded values so we can make sure that this part above isnt causing any issues
-            [
-                {
-                    "questionId": 6,
-                    "question": "How many elements can you add the class of \"custom-class\"?",
-                    "correctAnswer": {
-                        "answerId": 21,
-                        "answer": "As many as you want",
-                        "questionId": {}
-                    },
-                    "categoryId": {
-                        "categoryId": 1,
-                        "categoryName": "HTML"
-                    },
-                    "statusId": {
-                        "statusId": 2,
-                        "statusName": "Approved"
-                    }
-                },
-                {
-                    "questionId": 7,
-                    "question": "What is the format for creating a div element in JavaScript?",
-                    "correctAnswer": {
-                        "answerId": 25,
-                        "answer": "document.createElement('div')",
-                        "questionId": {}
-                    },
-                    "categoryId": {
-                        "categoryId": 1,
-                        "categoryName": "HTML"
-                    },
-                    "statusId": {
-                        "statusId": 2,
-                        "statusName": "Approved"
-                    }
-                },
-                {
-                    "questionId": 8,
-                    "question": "What does DOM stand for?",
-                    "correctAnswer": {
-                        "answerId": 29,
-                        "answer": "Document Object Model",
-                        "questionId": {}
-                    },
-                    "categoryId": {
-                        "categoryId": 1,
-                        "categoryName": "HTML"
-                    },
-                    "statusId": {
-                        "statusId": 2,
-                        "statusName": "Approved"
-                    }
-                },
-                {
-                    "questionId": 9,
-                    "question": "What is a meta tag used for?",
-                    "correctAnswer": {
-                        "answerId": 33,
-                        "answer": "Specify information about the page such as author or keywords",
-                        "questionId": {}
-                    },
-                    "categoryId": {
-                        "categoryId": 1,
-                        "categoryName": "HTML"
-                    },
-                    "statusId": {
-                        "statusId": 2,
-                        "statusName": "Approved"
-                    }
-                },
-                {
-                    "questionId": 10,
-                    "question": "Which of these is valid list syntax for creating an ordered list?",
-                    "correctAnswer": {
-                        "answerId": 37,
-                        "answer": "<ol> <li>Item 1</li> <li>Item 2</li> <li>Item 3</li> </ol>",
-                        "questionId": {}
-                    },
-                    "categoryId": {
-                        "categoryId": 1,
-                        "categoryName": "HTML"
-                    },
-                    "statusId": {
-                        "statusId": 2,
-                        "statusName": "Approved"
-                    }
-                }
-            ]
+        const categoryName = 'CSS';
+        console.log(categoryName)
+        const resp = await fetch(`http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/questions/category/${categoryName}/amount/5`, {
+            credentials: 'include'
+        });
+        const questions = await resp.json();
+        const questionsFromServer = questions.content
+        console.log(questionsFromServer)
+
         let quiz: any[] = [];
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < questionsFromServer.length; i++) {
             const questionId = questionsFromServer[i].questionId;
             const answerResponse = await fetch(`http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/answers/question/${questionId}`, {
                 credentials: 'include'
@@ -124,7 +46,8 @@ export default class QuizStartComponent extends Component<{}, IState>  {
             const quizCard = {
                 question: questionsFromServer[i],
                 answersFromServer,
-                selectedAnswer: 0
+                selectedAnswer: 0,
+                message: ''
             }
             quiz.push(quizCard);
         }
@@ -226,18 +149,25 @@ export default class QuizStartComponent extends Component<{}, IState>  {
         }
     }
 
-    submitAnswer(event: React.MouseEvent<any, MouseEvent>) {
+    async submitAnswer(event: React.MouseEvent<any, MouseEvent>) {
         event.preventDefault();
         let checkQuiz = this.state.quiz[this.state.pageNumber - 1];
+        let quiz = this.state.quiz
         let selectedAnswer = checkQuiz && this.state.quiz[this.state.pageNumber - 1].selectedAnswer
         if (selectedAnswer === (checkQuiz && (checkQuiz.question && checkQuiz.question.correctAnswer.answerId))) {
+            quiz[this.state.pageNumber - 1].message = 'Correct Answer!'
+            console.log(quiz);
             this.setState({
-                message: 'Correct Answer!'
+                quiz
             })
+            console.log(this.state.quiz[0].message)
         } else {
+            console.log(this.state.quiz[0].message)
+            quiz[this.state.pageNumber - 1].message = 'Incorrect Answer!'
             this.setState({
-                message: 'Incorrect Answer!'
-            })        }
+                quiz
+            })
+        }
         return undefined;
     }
 
@@ -293,11 +223,11 @@ export default class QuizStartComponent extends Component<{}, IState>  {
                                     </Col>
                                 </Row>
                             </div>
-                            <br/>
+                            <br />
                             <Row>
                                 <Col xs="6" sm="4"></Col>
                                 <Col xs="6" sm="4">
-                                    <h3>{this.state.message}</h3>
+                                    <h3>{this.state.quiz && (this.state.quiz[this.state.pageNumber] && this.state.quiz[this.state.pageNumber - 1].message)}</h3>
                                 </Col>
                                 <Col xs="6" sm="4"></Col>
                             </Row>
@@ -311,7 +241,9 @@ export default class QuizStartComponent extends Component<{}, IState>  {
                                 </Col>
                                 <Col xs="6" sm="4">
                                     <Button className={this.updateNextButton()} color="info" onClick={() => this.nextQuestion()}>Next</Button>
-                                    <Button className={this.updateFinishButton()} color="info" onClick={() => this.nextQuestion()}>Finish</Button>
+                                    <Link to="/quiz/result">
+                                        <Button className={this.updateFinishButton()} color="info">Finish</Button>
+                                    </Link>
                                 </Col>
                             </Row>
                         </div>
@@ -321,3 +253,12 @@ export default class QuizStartComponent extends Component<{}, IState>  {
         );
     };
 }
+
+const mapStateToProps = (state: IState) => {
+    return {
+        category: state.category
+    }
+}
+
+
+export default connect(mapStateToProps)(QuizStartComponent);

@@ -12,13 +12,6 @@ export interface ICategoryProps {
 
 export class CategoriesComponent extends Component<ICategoryProps> {
 
-    constructor(props: any) {
-        super(props)
-        this.state = {
-            categorySelected: ''
-        }
-    }
-
     updateCategory = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
             this.props.updateCategory(event.currentTarget.innerText);
     }
