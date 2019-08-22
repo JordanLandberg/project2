@@ -35,7 +35,7 @@ export  default class SignIn extends React.Component<RouteComponentProps, IState
     submit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const resp = await fetch('http://localhost:8012/login' ,{
+            const resp = await fetch('http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/login' ,{
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(this.state.credentials),
@@ -56,11 +56,14 @@ export  default class SignIn extends React.Component<RouteComponentProps, IState
             });
         }
     }
+    
+
+    
 
     render() {
         return (
             <form className="form-signin" onSubmit={this.submit} >
-                <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                <h1 className="h3 mb-3 font-weight-normal">Please Login</h1>
                 <label htmlFor="inputemail" className="sr-only">email</label>
                 <input type="text" id="inputemail" 
                     name="email"
@@ -79,10 +82,15 @@ export  default class SignIn extends React.Component<RouteComponentProps, IState
                 
                 <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
               
-                <a className="btn btn-lg btn-primary btn-block" href="/home/register" >registr</a>
+                <a className="btn btn-lg btn-primary btn-block" href="/home/register" >register</a>
          
-                <p className="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+                <p className="mt-5 mb-3 text-muted"> <i>It's Not Complicated , We Just Focus On What Matters </i></p>
+                 
             </form>
+            
+        
         );
     }
   }
+
+

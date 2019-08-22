@@ -15,6 +15,8 @@ import QuizResultComponent from './components/quiz/quiz-result.component';
 import QuizSectionComponent from './components/quiz/quiz-section.component';
 import QuizStartComponent from './components/quiz/quiz-start.component';
 import ViewUsersComponent from './components/user/view-users.component';
+import update from './components/user/update-users.component';
+
 
 //import { userInfo } from 'os';
 
@@ -39,6 +41,7 @@ const App: React.FC = () => {
                         <Route path="/quiz/start" component={QuizStartComponent} />
                         <Route path="/admin/review" component={ReviewQuestionComponent} />
                         <Route path="/admin/users" component={ViewUsersComponent} />
+                        <Route path="/user/update" component={update} />
                     </Switch>
                 </div>
             </BrowserRouter>

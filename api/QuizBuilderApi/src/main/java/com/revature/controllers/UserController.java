@@ -22,17 +22,20 @@ public class UserController {
 
 	@Autowired
 	private UserService us;
-
-	@GetMapping
+	
+	
+	// made sess
+	@GetMapping(consumes = "application/json")
 	public List<User> findAll(HttpSession sess) {
 //		if (sess.getAttribute("user") !=null)
 		return us.findAll();
-
-//			return null;
-
+		
+		return us.findAll();
+			//return null;
+		
 	}
-
-	@GetMapping("/{id}")
+	
+	@GetMapping(value="/{id}",consumes = "application/json")
 	public User findById(@PathVariable int id, HttpSession sess) {
 //		if (sess.getAttribute("user") !=null)
 		return us.findById(id);

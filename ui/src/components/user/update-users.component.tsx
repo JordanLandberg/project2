@@ -1,34 +1,55 @@
 import React from 'react';
-// import { environment } from '../../../environment';
+
 import { RouteComponentProps } from 'react-router';
+import Role from '../../models/role';
+//import Role from '../../models/role';
+// import Role from '../../models/role';
+// import Role from '../../models/role';
+//import { Link } from 'react-router-dom';
 
 interface IState {
-    userinfo: {
+    credentials: {
+        userId: number,
+        email: string,
+        password: string,
         firstName: string,
         lastName: string,
-        email: string
+        phone:string,
+        role:  Role
+       
+        
     },
     errorMessage?: string
 }
 
-export class PatchUser extends React.Component<RouteComponentProps, IState> {
+export  default class update extends React.Component<RouteComponentProps, IState> {
 
     constructor(props: any) {
         super(props);
         this.state = {
-            userinfo: {
+            credentials: {
+                userId: 0,
+                email: '',
+                password: '',
                 firstName: '',
                 lastName: '',
-                email: ''
+                phone:'',
+               role: {
+
+                roleId:1,
+                roleName:''
+               }
+            
             }
+          
         }
     }
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name;
         this.setState({
-            userinfo: {
-                ...this.state.userinfo,
+            credentials: {
+                ...this.state.credentials,
                 [name]: event.target.value
             }
         });
@@ -36,57 +57,103 @@ export class PatchUser extends React.Component<RouteComponentProps, IState> {
 
     submit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        try{
-            const resp = await fetch('http://localhost:8012/users', {
+        try {
+            const resp = await fetch('http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/users' ,{
                 method: 'PUT',
                 credentials: 'include',
-                body: JSON.stringify(this.state.userinfo),
+                body: JSON.stringify(this.state.credentials),
                 headers: {
                     'content-type': 'application/json'
                 }
             });
             const user = await resp.json();
             console.log(user);
-            // localStorage.setItem('user', JSON.stringify(user));
-            this.props.history.push('/my-user-info');
+    
+            localStorage.setItem('users', JSON.stringify(user));
+            this.props.history.push('/login'); // navigate pages
         } catch (err) {
-            console.error(err);
+            console.log(err);
             console.log('invalid credentials');
             this.setState({
-                errorMessage: 'Wrong Input Added'
+                errorMessage: 'Invalid Credentials'
             });
         }
     }
 
     render() {
         return (
-            <form className="user-patch-form" onSubmit={this.submit}>
-                <h1 className="updating title">Please Update Your Information</h1>
-                <label htmlFor="inputFirstName" className="text-only">First Name</label>
-                <input type="text" id="inputFirstName"
+            <form className="form-signin" onSubmit={this.submit}>
+                <h1 className="h3 mb-3 font-weight-normal">Update user</h1>
+              
+
+
+<label htmlFor="inputemail" className="sr-only">FirstName</label>
+                <input type="text" id="inputemail" 
                     name="firstName"
                     className="form-control"
-                    placeholder="first name here"
+                    placeholder="first name" 
                     onChange={this.handleChange}
-                    value={this.state.userinfo.firstName} required />
-                <label htmlFor="inputLastName" className="text-only">Last Name</label>
-                <input type="text" id="inputLastName"
+                    value={this.state.credentials.firstName} required />
+
+
+
+<label htmlFor="inputemail" className="sr-only">LastName</label>
+                <input type="text" id="inputemail" 
                     name="lastName"
                     className="form-control"
-                    placeholder="last name here"
+                    placeholder="last name" 
                     onChange={this.handleChange}
-                    value={this.state.userinfo.lastName} required />
-                <label htmlFor="inputEmail" className="text-only">Email</label>
-                <input type="text" id="inputEmail"
-                    name="email"
+                    value={this.state.credentials.lastName} required />
+
+<label htmlFor="inputemail" className="sr-only">phone</label>
+                <input type="text" id="inputemail" 
+                    name="phone"
                     className="form-control"
-                    placeholder="email address"
+                    placeholder="phone" 
                     onChange={this.handleChange}
-                    value={this.state.userinfo.email} required />
+                    value={this.state.credentials.phone} required />
+
+{/* <label htmlFor="inputemail" className="sr-only">roleName</label>
+                <input type="text" id="inputemail" 
+                    name="role"
+                    className="form-control"
+                    placeholder="roleName" 
+                    onChange={this.handleChange}
+                    value={this.state.credentials.role.roleName} required />
+
+
+
+ */}
+
+<label htmlFor="inputPassword" className="sr-only">Old Password</label>
+                <input type="password" id="inputPassword" 
+                  
+                    className="form-control" 
+                    placeholder="Password"
+                    onChange={this.handleChange}
+                    value={this.state.credentials.password} required />
+
+                <label htmlFor="inputPassword" className="sr-only">new Password</label>
+                <input type="password" id="inputPassword" 
+                    name="password"
+                    className="form-control" 
+                    placeholder="Password"
+                    onChange={this.handleChange}
+                    value={this.state.credentials.password} required />
                 {this.state.errorMessage && <p id="error-message">{this.state.errorMessage}</p>}
-                <button color="success" type="submit">Update Profile</button>
+                <button className="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+                <a className="btn btn-lg btn-primary btn-block" href="/home/login" >Back To login</a>
+              
+{/*   
+                <p className="mt-5 mb-3 text-muted">&copy; 2017-2019</p> */}
             </form>
-            //<h1>Update Users</h1>
+
+
         );
     }
-}
+  }
+
+
+
+
+

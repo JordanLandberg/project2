@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dtos.Credential;
+import com.revature.exception.AuthException;
 import com.revature.models.User;
 import com.revature.services.UserService;
 
@@ -19,9 +20,16 @@ public class AuthController {
 	@Autowired
 	private UserService us;
 
-	@PostMapping("/login")
-	public User login(@RequestBody Credential cred, HttpServletRequest req) {
+	//made login in spring and ui
+	@PostMapping(value="/login", produces= {"application/json"} )
+	public User login(@RequestBody Credential cred,HttpServletRequest req) {
+		
+		if(us.login(cred)!=null) {
+		sess=req.getSession();
+		sess.setAttribute("user",cred.getEmail());
 		return us.login(cred);
+		}
+		throw new AuthException("Not Authorized hahahaha");
 	}
 
 	@GetMapping("/login")
