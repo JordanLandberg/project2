@@ -29,8 +29,8 @@ CREATE TABLE question_status (
 );
 CREATE TABLE question (
     question_id SERIAL PRIMARY KEY,
-    question TEXT UNIQUE NOT NULL,
-    correct_answer TEXT,
+    question TEXT NOT NULL,
+    correct_answer INTEGER,
     category_id INTEGER NOT NULL REFERENCES question_category(category_id),
     status_id INTEGER NOT NULL REFERENCES question_status(status_id)
 );
@@ -39,5 +39,3 @@ CREATE TABLE answer (
     answer TEXT NOT NULL,
     question_id INTEGER NOT NULL REFERENCES question(question_id)
 );
-ALTER TABLE question
-ADD CONSTRAINT correct_answer_fk FOREIGN KEY (correct_answer) REFERENCES answer(answer_id);
