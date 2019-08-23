@@ -12,13 +12,6 @@ export interface ICategoryProps {
 
 export class CategoriesComponent extends Component<ICategoryProps> {
 
-    constructor(props: any) {
-        super(props)
-        this.state = {
-            categorySelected: ''
-        }
-    }
-
     updateCategory = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
             this.props.updateCategory(event.currentTarget.innerText);
     }
@@ -86,7 +79,7 @@ export class CategoriesComponent extends Component<ICategoryProps> {
                             onClick={this.updateCategory}
                             body inverse>
                             <Link to="/quiz/start">
-                                <h1><CardTitle>Data Structures / Algorithms</CardTitle></h1>
+                                <h1><CardTitle>Algorithms</CardTitle></h1>
                             </Link>
                         </Card>
                     </Col>
