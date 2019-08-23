@@ -2,6 +2,7 @@ import React from 'react';
 
 import { RouteComponentProps } from 'react-router';
 import Role from '../../models/role';
+import { Link } from 'react-router-dom';
 //import Role from '../../models/role';
 // import Role from '../../models/role';
 // import Role from '../../models/role';
@@ -47,10 +48,14 @@ export  default class update extends React.Component<RouteComponentProps, IState
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name;
+        const loggedInUserString = localStorage.getItem('user');
+        const loggedInUser = loggedInUserString && JSON.parse(loggedInUserString);
         this.setState({
             credentials: {
                 ...this.state.credentials,
-                [name]: event.target.value
+                [name]: event.target.value,
+                userId: loggedInUser.userId,
+                email: loggedInUser.email
             }
         });
     }
@@ -141,7 +146,7 @@ export  default class update extends React.Component<RouteComponentProps, IState
                     onChange={this.handleChange}
                     value={this.state.credentials.password} required />
                 {this.state.errorMessage && <p id="error-message">{this.state.errorMessage}</p>}
-                <button className="btn btn-lg btn-primary btn-block btn-success" type="submit">Update</button>
+                <Link to="/second"><button className="btn btn-lg btn-primary btn-block btn-success" type="submit">Update</button></Link>
                 <a className="btn btn-lg btn-primary btn-block info" href="/home/login" >Back To login</a>
        
           

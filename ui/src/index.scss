@@ -56,6 +56,9 @@ body {
 .answer4 {
   background: rgb(255, 0, 0);
 }
+.answer5 {
+  background: rgb(0, 0, 255);
+}
 
 
 /****************************
@@ -120,4 +123,9 @@ width: 40%;
 }
 .reviewCard div, .reviewCard{
     background: #e9e9e971;
+}
+
+.categories a{
+    text-decoration: none;
+    color: white;
 }

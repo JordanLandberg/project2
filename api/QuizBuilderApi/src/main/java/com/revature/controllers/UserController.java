@@ -29,8 +29,6 @@ public class UserController {
 	public List<User> findAll(HttpSession sess) {
 //		if (sess.getAttribute("user") !=null)
 		return us.findAll();
-		
-		return us.findAll();
 			//return null;
 		
 	}

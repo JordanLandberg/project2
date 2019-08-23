@@ -20,16 +20,16 @@ public class AuthController {
 	@Autowired
 	private UserService us;
 
-	//made login in spring and ui
-	@PostMapping(value="/login", produces= {"application/json"} )
-	public User login(@RequestBody Credential cred,HttpServletRequest req) {
-		
-		if(us.login(cred)!=null) {
-		sess=req.getSession();
-		sess.setAttribute("user",cred.getEmail());
-		return us.login(cred);
+	// made login in spring and ui
+	@PostMapping(value = "/login")
+	public User login(@RequestBody Credential cred, HttpServletRequest req, HttpSession sess) {
+
+		if (us.login(cred) != null) {
+			sess = req.getSession();
+			sess.setAttribute("user", cred.getEmail());
+			return us.login(cred);
 		}
-		throw new AuthException("Not Authorized hahahaha");
+		throw new AuthException("Not Authorized");
 	}
 
 	@GetMapping("/login")

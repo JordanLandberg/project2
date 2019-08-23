@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { RouteComponentProps } from 'react-router';
+import { Link } from 'react-router-dom';
 // import User from '../../models/user';
 
 interface IState {
@@ -83,9 +84,9 @@ export  default class SignIn extends React.Component<RouteComponentProps, IState
                     value={this.state.credentials.password} required />
                 {this.state.errorMessage && <p id="error-message">{this.state.errorMessage}</p>}
                 
-                <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <Link to="/categories"><button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button></Link>
               
-                <a className="btn btn-lg btn-primary btn-block" href="/home/register" >register</a>
+                <Link to="/home/register"><button className="btn btn-lg btn-primary btn-block">register</button></Link>
          
                 <p className="mt-5 mb-3 text-muted"> <i>It's Not Complicated , We Just Focus On What Matters </i></p>
                  

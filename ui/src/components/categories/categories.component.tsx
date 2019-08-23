@@ -19,7 +19,7 @@ export class CategoriesComponent extends Component<ICategoryProps> {
     // this.props.history.push('/quiz/start')
     render() {
         return (
-            <Container>
+            <Container className="categories">
                 <h1>Front-End</h1>
                 <Row>
                     <Col>

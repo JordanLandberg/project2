@@ -2,6 +2,7 @@ import React from 'react';
 
 import { RouteComponentProps } from 'react-router';
 import Role from '../../models/role';
+import { Link } from 'react-router-dom';
 //import Role from '../../models/role';
 // import Role from '../../models/role';
 // import Role from '../../models/role';
@@ -142,7 +143,7 @@ export  default class register extends React.Component<RouteComponentProps, ISta
                     value={this.state.credentials.password} required />
                 {this.state.errorMessage && <p id="error-message">{this.state.errorMessage}</p>}
                 <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-                <a className="btn btn-lg btn-primary btn-block" href="/home/login" >Back To login</a>
+                <Link to="/home/login"><button className="btn btn-lg btn-primary btn-block" >Back To login</button></Link>
               
 {/*   
                 <p className="mt-5 mb-3 text-muted">&copy; 2017-2019</p> */}
