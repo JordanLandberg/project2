@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +17,6 @@ import com.revature.services.UserService;
 @RestController
 public class AuthController {
 
-	private HttpSession sess;
 	@Autowired
 	private UserService us;
 
@@ -33,17 +31,16 @@ public class AuthController {
 		}
 		throw new AuthException("Not Authorized hahahaha");
 	}
-	
+
+	@GetMapping("/login")
+	public String logout(HttpSession sess) {
+		sess.invalidate();
+		return "redirect:localhost:8012/login";
+	}
+
 	@GetMapping("/check-auth")
 	public User checkAuth(HttpServletRequest req) {
 		return (User) req.getSession().getAttribute("user");
-		
-	
 	}
-	
-	
-	
-		
-	
-	
+
 }

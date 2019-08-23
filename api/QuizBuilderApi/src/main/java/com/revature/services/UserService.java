@@ -28,16 +28,7 @@ public class UserService {
 	}
 	
 	public User findById(int userId) {
-		Optional<User> user=null;
-		 
-		 user = ur.findById(userId);
-		 if(user.isPresent())
-			 return user.get();
-		 else
-			 throw new NotFoundException("not found :)");
-		 
-		 
-		 
+		return ur.findByUserId(userId);
 	}
 
 	@Transactional
