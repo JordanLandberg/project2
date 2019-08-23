@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Button, Card, CardText, CardTitle, Col, Container, Row } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import { IQuizState, IState } from '../../reducers';
 import { connect } from 'react-redux';
+import { Button, Card, CardText, CardTitle, Col, Container, Row } from 'reactstrap';
+import { IQuizState, IState } from '../../reducers';
+import QuizResultComponent from './quiz-result.component';
 
 interface IQuizStartState {
     quiz: any[],
     pageNumber: number,
-    currentAnswers: any[]
+    currentAnswers: any[],
+    finishQuiz: boolean,
+    correctAnswers: number
 }
 
 export interface ICategoryProps {
@@ -22,18 +24,22 @@ export class QuizStartComponent extends Component<ICategoryProps, IQuizStartStat
         this.state = {
             quiz: [],
             pageNumber: 1,
-            currentAnswers: []
+            currentAnswers: [],
+            finishQuiz: false,
+            correctAnswers: 0
         }
     }
 
     async componentDidMount() {
-        const categoryName = 'CSS';
+        console.log(this.props.category.category)
+        // const categoryName = this.props.category && this.props.category.category;
+        const categoryName = this.props.category.category;
         console.log(categoryName)
         const resp = await fetch(`http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/questions/category/${categoryName}/amount/5`, {
             credentials: 'include'
         });
         const questions = await resp.json();
-        const questionsFromServer = questions.content
+        const questionsFromServer = questions
         console.log(questionsFromServer)
 
         let quiz: any[] = [];
@@ -70,9 +76,7 @@ export class QuizStartComponent extends Component<ICategoryProps, IQuizStartStat
         let checkQuiz = this.state.quiz[page];
         let selectedAnswer = checkQuiz && this.state.quiz[page].selectedAnswer
         let x = (checkQuiz && (checkQuiz.answersFromServer && checkQuiz.answersFromServer[0].answerId))
-        console.log(selectedAnswer)
         if (selectedAnswer === x) {
-            console.log('selectedone')
             return 'answer1 clickable selected'
         } else {
             return 'answer1 clickable';
@@ -82,9 +86,7 @@ export class QuizStartComponent extends Component<ICategoryProps, IQuizStartStat
     updateTwo(page: number) {
         let checkQuiz = this.state.quiz[page];
         let selectedAnswer = checkQuiz && this.state.quiz[page].selectedAnswer
-        console.log(selectedAnswer)
         if (selectedAnswer === (checkQuiz && (checkQuiz.answersFromServer && checkQuiz.answersFromServer[1].answerId))) {
-            console.log('selectedtwo')
             return 'answer2 clickable selected'
         } else {
             return 'answer2 clickable';
@@ -95,7 +97,6 @@ export class QuizStartComponent extends Component<ICategoryProps, IQuizStartStat
         let checkQuiz = this.state.quiz[page];
         let selectedAnswer = checkQuiz && this.state.quiz[page].selectedAnswer
         if (selectedAnswer === (checkQuiz && (checkQuiz.answersFromServer && checkQuiz.answersFromServer[2].answerId))) {
-            console.log('selectedthree')
             return 'answer3 clickable selected'
         } else {
             return 'answer3 clickable';
@@ -106,7 +107,6 @@ export class QuizStartComponent extends Component<ICategoryProps, IQuizStartStat
         let checkQuiz = this.state.quiz[page];
         let selectedAnswer = checkQuiz && this.state.quiz[page].selectedAnswer
         if (selectedAnswer === (checkQuiz && (checkQuiz.answersFromServer && checkQuiz.answersFromServer[3].answerId))) {
-            console.log('selectedfour')
             return 'answer4 clickable selected'
         } else {
             return 'answer4 clickable';
@@ -147,6 +147,38 @@ export class QuizStartComponent extends Component<ICategoryProps, IQuizStartStat
         } else {
             return 'd-none';
         }
+        
+    }
+
+    updateQuizPage() {
+        console.log(this.state.finishQuiz)
+        if (this.state.finishQuiz) {
+            return 'form-quizquestion d-none'
+        } else {
+            return 'form-quizquestion'
+        }
+    }
+
+    updateQuizResultPage() {
+        if (this.state.finishQuiz) {
+            return 'd-block'
+        } else {
+            return 'd-none'
+        }
+    }
+
+    setFinish(value: number) {
+        if(!value) {
+            this.setState({
+                finishQuiz: false
+            })
+        }
+    }
+
+    finishQuiz() {
+        this.setState({
+            finishQuiz: true
+        })
     }
 
     async submitAnswer(event: React.MouseEvent<any, MouseEvent>) {
@@ -158,7 +190,8 @@ export class QuizStartComponent extends Component<ICategoryProps, IQuizStartStat
             quiz[this.state.pageNumber - 1].message = 'Correct Answer!'
             console.log(quiz);
             this.setState({
-                quiz
+                quiz,
+                correctAnswers: this.state.correctAnswers + 1
             })
             console.log(this.state.quiz[0].message)
         } else {
@@ -176,80 +209,83 @@ export class QuizStartComponent extends Component<ICategoryProps, IQuizStartStat
         const currentQuestion = quiz[this.state.pageNumber - 1];
         console.log(currentQuestion)
         return (
-            <form className="form-quizquestion">
-                <Container>
-                    {
-                        <div>
+            <div>
+                <form className={this.updateQuizPage()}>
+                    <Container>
+                        {
                             <div>
-                                <Card className="question" body inverse>
-                                    <h1><CardTitle>Question #{this.state.pageNumber}</CardTitle></h1>
-                                    <h3><CardText>{currentQuestion && currentQuestion.question.question}</CardText></h3>
-                                </Card>
-                                <br></br>
-                                <Row>
-                                    <Col>
-                                        <Card className={this.updateOne(this.state.pageNumber - 1)}
-                                            body inverse
-                                            onClick={(e) => this.selectedAnswer(currentQuestion && currentQuestion.answersFromServer, 0, this.state.pageNumber - 1)}>
-                                            <CardText>{currentQuestion && currentQuestion.answersFromServer[0].answer}</CardText>
-                                        </Card>
-                                    </Col>
-                                    <Col>
-                                        <div>
-                                            <Card className={this.updateTwo(this.state.pageNumber - 1)} body inverse
-                                                onClick={(e) => this.selectedAnswer(currentQuestion && currentQuestion.answersFromServer, 1, this.state.pageNumber - 1)}>
-                                                <CardText>{currentQuestion && currentQuestion.answersFromServer[1].answer}</CardText>
+                                <div>
+                                    <Card className="question" body inverse>
+                                        <h1><CardTitle>Question #{this.state.pageNumber}</CardTitle></h1>
+                                        <h3><CardText>{currentQuestion && currentQuestion.question.question}</CardText></h3>
+                                    </Card>
+                                    <br></br>
+                                    <Row>
+                                        <Col>
+                                            <Card className={this.updateOne(this.state.pageNumber - 1)}
+                                                body inverse
+                                                onClick={(e) => this.selectedAnswer(currentQuestion && currentQuestion.answersFromServer, 0, this.state.pageNumber - 1)}>
+                                                <CardText>{currentQuestion && currentQuestion.answersFromServer[0].answer}</CardText>
                                             </Card>
-                                        </div>
+                                        </Col>
+                                        <Col>
+                                            <div>
+                                                <Card className={this.updateTwo(this.state.pageNumber - 1)} body inverse
+                                                    onClick={(e) => this.selectedAnswer(currentQuestion && currentQuestion.answersFromServer, 1, this.state.pageNumber - 1)}>
+                                                    <CardText>{currentQuestion && currentQuestion.answersFromServer[1].answer}</CardText>
+                                                </Card>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                    <br></br>
+                                    <Row>
+                                        <Col>
+                                            <div>
+                                                <Card className={this.updateThree(this.state.pageNumber - 1)} body inverse
+                                                    onClick={(e) => this.selectedAnswer(currentQuestion && currentQuestion.answersFromServer, 2, this.state.pageNumber - 1)}>
+                                                    <CardText>{currentQuestion && currentQuestion.answersFromServer[2].answer}</CardText>
+                                                </Card>
+                                            </div>
+                                        </Col>
+                                        <Col>
+                                            <div>
+                                                <Card className={this.updateFour(this.state.pageNumber - 1)} body inverse
+                                                    onClick={(e) => this.selectedAnswer(currentQuestion && currentQuestion.answersFromServer, 3, this.state.pageNumber - 1)}>
+                                                    <CardText>{currentQuestion && currentQuestion.answersFromServer[3].answer}</CardText>
+                                                </Card>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </div>
+                                <br />
+                                <Row>
+                                    <Col xs="6" sm="4"></Col>
+                                    <Col xs="6" sm="4">
+                                        <h3>{this.state.quiz && (this.state.quiz[this.state.pageNumber] && this.state.quiz[this.state.pageNumber - 1].message)}</h3>
                                     </Col>
+                                    <Col xs="6" sm="4"></Col>
                                 </Row>
                                 <br></br>
                                 <Row>
-                                    <Col>
-                                        <div>
-                                            <Card className={this.updateThree(this.state.pageNumber - 1)} body inverse
-                                                onClick={(e) => this.selectedAnswer(currentQuestion && currentQuestion.answersFromServer, 2, this.state.pageNumber - 1)}>
-                                                <CardText>{currentQuestion && currentQuestion.answersFromServer[2].answer}</CardText>
-                                            </Card>
-                                        </div>
+                                    <Col xs="6" sm="4" >
+                                        <Button className={this.updatePrevButton()} color="info" onClick={() => this.prevQuestion()}>Prev</Button>
                                     </Col>
-                                    <Col>
-                                        <div>
-                                            <Card className={this.updateFour(this.state.pageNumber - 1)} body inverse
-                                                onClick={(e) => this.selectedAnswer(currentQuestion && currentQuestion.answersFromServer, 3, this.state.pageNumber - 1)}>
-                                                <CardText>{currentQuestion && currentQuestion.answersFromServer[3].answer}</CardText>
-                                            </Card>
-                                        </div>
+                                    <Col xs="6" sm="4">
+                                        <Button color="info" onClick={(e) => this.submitAnswer(e)}>Submit Answer</Button>
+                                    </Col>
+                                    <Col xs="6" sm="4">
+                                        <Button className={this.updateNextButton()} color="info" onClick={() => this.nextQuestion()}>Next</Button>
+                                        <Button className={this.updateFinishButton()} color="info" onClick={() => this.finishQuiz()}>Finish</Button>
                                     </Col>
                                 </Row>
                             </div>
-                            <br />
-                            <Row>
-                                <Col xs="6" sm="4"></Col>
-                                <Col xs="6" sm="4">
-                                    <h3>{this.state.quiz && (this.state.quiz[this.state.pageNumber] && this.state.quiz[this.state.pageNumber - 1].message)}</h3>
-                                </Col>
-                                <Col xs="6" sm="4"></Col>
-                            </Row>
-                            <br></br>
-                            <Row>
-                                <Col xs="6" sm="4" >
-                                    <Button className={this.updatePrevButton()} color="info" onClick={() => this.prevQuestion()}>Prev</Button>
-                                </Col>
-                                <Col xs="6" sm="4">
-                                    <Button color="info" onClick={(e) => this.submitAnswer(e)}>Submit Answer</Button>
-                                </Col>
-                                <Col xs="6" sm="4">
-                                    <Button className={this.updateNextButton()} color="info" onClick={() => this.nextQuestion()}>Next</Button>
-                                    <Link to="/quiz/result">
-                                        <Button className={this.updateFinishButton()} color="info">Finish</Button>
-                                    </Link>
-                                </Col>
-                            </Row>
-                        </div>
-                    }
-                </Container>
-            </form >
+                        }
+                    </Container>
+                </form >
+                <div className={this.updateQuizResultPage()}>
+                    <QuizResultComponent correctAnswers={this.state.correctAnswers} totalQuestion={this.state.quiz.length} category={this.props.category.category}/>
+                </div>
+            </div>
         );
     };
 }
