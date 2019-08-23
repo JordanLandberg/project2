@@ -12,7 +12,7 @@ code {
     monospace;
 }
 /*****************************
-    View Users
+    VIEW USERS
 *****************************/
 .user-table table, .user-table tr, .user-table th, .user-table td{
     border: 1px solid black;
@@ -28,7 +28,7 @@ body {
     background: rgb(202, 248, 206);
 }
 /*****************************
-    Quiz
+    QUIZ
 *****************************/
 .clickable {
   cursor: pointer;
@@ -51,9 +51,20 @@ body {
 .answer5 {
   background: rgb(0, 26, 255);
 }
-
+.selected{
+    box-shadow: 0px 0px 20px #000000;
+}
+.notSelected{
+    box-shadow: none;
+}
+.correctAnswer {
+    box-shadow: 0px 0px 20px #164e00;
+}
+.correctAnswer {
+    box-shadow: 0px 0px 20px #ff0000;
+}
 /*****************************
-    sign in
+    SIGN IN
 *****************************/
 .form-signin {
   width: 100%;
@@ -95,11 +106,8 @@ body {
 }
 
 /*****************************
-
   NAV
-
 *****************************/
-
 .qb-logo {
   width: auto;
   height: 50px;
