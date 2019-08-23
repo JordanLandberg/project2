@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
 
 interface IState {
     quiz: any[],
@@ -16,14 +17,20 @@ export default class ReviewQuestionComponent extends Component<{}, IState> {
     }
 
     async componentWillMount() {
-        // const resp = await fetch('http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/questions/status/Approved', {
-        const resp = await fetch('http://localhost:8012/questions/status/Approved', {
+        this.getQuestions();
+    }
+
+    getQuestions = async () => {
+
+    
+        const resp = await fetch('http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/questions/status/Pending', {
+        // const resp = await fetch('http://localhost:8012/questions/status/Pending', {
             credentials: 'include'
         });
         const pendingQuestions = await resp.json();
-
+    console.log(pendingQuestions);
         let quiz: any[] = [];
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < pendingQuestions.length; i++) { 
             const questionId = pendingQuestions[i].questionId;
             const answerResponse = await fetch(`http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/answers/question/${questionId}`, {
                 credentials: 'include'
@@ -42,6 +49,46 @@ export default class ReviewQuestionComponent extends Component<{}, IState> {
         });
     }
 
+approveQ = async (selectedQuestion: any) => {
+        const body = {
+            ...selectedQuestion,
+            statusId: {
+                statusId: 2
+            }
+
+        }
+        await fetch('http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/questions', { 
+            method: 'PUT',
+            credentials: 'include',
+            body: JSON.stringify(body),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+        this.getQuestions(); 
+    }
+
+denyQ = async (selectedQuestion: any) => {
+    console.log(selectedQuestion)
+        const body = {
+            
+            ...selectedQuestion,
+            statusId: {
+                statusId: 3
+            }
+
+        }
+        
+        await fetch('http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/questions', { 
+            method: 'PUT',
+            credentials: 'include',
+            body: JSON.stringify(body),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+        this.getQuestions();
+    }
 
     render() {
         const quiz = this.state.quiz;
@@ -64,6 +111,7 @@ export default class ReviewQuestionComponent extends Component<{}, IState> {
                                 <th>Incorrect Answer 1</th>
                                 <th>Incorrect Answer 2</th>
                                 <th>Incorrect Answer 3</th>
+                                <th>Approve/Deny</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,6 +124,10 @@ export default class ReviewQuestionComponent extends Component<{}, IState> {
                                     <td>{q.answersFromServer[1].answer}</td> 
                                     <td>{q.answersFromServer[2].answer}</td>
                                     <td>{q.answersFromServer[3].answer}</td>
+                                    <td>
+                                        <Button color='success' onClick={() => this.approveQ(q.question)}>Approve</Button>
+                                        <Button color='warning' onClick={() => this.denyQ(q.question)}>Deny</Button>
+                                    </td>
                                 </tr>)
                             }
                         </tbody>
