@@ -50,7 +50,7 @@ export  default class SignIn extends React.Component<RouteComponentProps, IState
             console.log(user);
     
             localStorage.setItem('user', JSON.stringify(user));
-            this.props.history.push('/home'); // navigate pages
+            this.props.history.push('/categories'); // navigate pages
         } catch (err) {
             console.log(err);
             console.log('invalid credentials');
@@ -84,7 +84,7 @@ export  default class SignIn extends React.Component<RouteComponentProps, IState
                     value={this.state.credentials.password} required />
                 {this.state.errorMessage && <p id="error-message">{this.state.errorMessage}</p>}
                 
-                <Link to="/categories"><button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button></Link>
+                <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
               
                 <Link to="/home/register"><button className="btn btn-lg btn-primary btn-block">register</button></Link>
          

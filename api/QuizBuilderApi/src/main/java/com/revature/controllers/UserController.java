@@ -25,7 +25,7 @@ public class UserController {
 	
 	
 	// made sess
-	@GetMapping(consumes = "application/json")
+	@GetMapping()
 	public List<User> findAll(HttpSession sess) {
 //		if (sess.getAttribute("user") !=null)
 		return us.findAll();
@@ -33,7 +33,7 @@ public class UserController {
 		
 	}
 	
-	@GetMapping(value="/{id}",consumes = "application/json")
+	@GetMapping(value="/{id}")
 	public User findById(@PathVariable int id, HttpSession sess) {
 //		if (sess.getAttribute("user") !=null)
 		return us.findById(id);
