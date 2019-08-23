@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { RouteComponentProps } from 'react-router';
+// import User from '../../models/user';
 
 interface IState {
     credentials: {
@@ -35,6 +36,7 @@ export  default class SignIn extends React.Component<RouteComponentProps, IState
     submit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
+            
             const resp = await fetch('http://quiz-api.2tfhzbz93a.us-east-2.elasticbeanstalk.com/login' ,{
                 method: 'POST',
                 credentials: 'include',
@@ -56,6 +58,7 @@ export  default class SignIn extends React.Component<RouteComponentProps, IState
             });
         }
     }
+  
     
 
     

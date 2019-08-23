@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+
 export default class NavbarComponent extends Component {
+    logoutHandler(){
+        // localStorage.setItem(User,"");
+        localStorage.setItem('user', '');
+
+
+ }
+
     render() {
         return (
         
@@ -45,7 +53,7 @@ export default class NavbarComponent extends Component {
                             <div className="dropdown-menu" aria-labelledby="examples-dropdown">
                                 <div className="dropdown-item"><Link to="/admin/users" className="unset-anchor nav-link active">View Users</Link></div>
                                 <div className="dropdown-item"><Link to="/admin/review" className="unset-anchor nav-link active">Review Questions</Link></div>
-                                <div className="dropdown-item"><Link to="/user/update" className="unset-anchor nav-link active">Update User</Link></div>
+                                {/* <div className="dropdown-item"><Link to="/user/update" className="unset-anchor nav-link active">Update User</Link></div> */}
                             </div>
                         </li>
                         <li className="nav-item active">
@@ -59,7 +67,7 @@ export default class NavbarComponent extends Component {
                         
                         <li className="nav-item active">
                             <Link to="/home/login" className="unset-anchor nav-link">
-                                <button className="btn btn-secondary btn-info btn-custom">Log out</button>
+                                <button onClick={()=>this.logoutHandler()} className="btn btn-secondary btn-info btn-custom">Log out</button>
                             </Link>
                         </li>
                     </ul>

@@ -16,6 +16,9 @@ import QuizSectionComponent from './components/quiz/quiz-section.component';
 import QuizStartComponent from './components/quiz/quiz-start.component';
 import ViewUsersComponent from './components/user/view-users.component';
 import update from './components/user/update-users.component';
+import  profile  from './components/user/user-profile.component';
+import userCardComponent from './components/user/User-card.component';
+// import usercard  from './components/user/user-card.component';
 
 
 //import { userInfo } from 'os';
@@ -31,6 +34,10 @@ const App: React.FC = () => {
                     {/* The switch will only render the first route to match */}
                     <Switch>
                         <Route path="/categories" component={CategoriesComponent} />
+                        <Route path="/second" component={profile} />
+                        <Route path="/second" component={userCardComponent} />
+
+
                         <Route path="/home/login" component={HomeLoginComponent} />
                         <Route path="/home/register" component={HomeSignupComponent} />
                         <Route path="/question/create" component={CreateQuestionComponent} />

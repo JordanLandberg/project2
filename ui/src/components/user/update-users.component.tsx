@@ -82,7 +82,7 @@ export  default class update extends React.Component<RouteComponentProps, IState
 
     render() {
         return (
-            <form className="form-signin" onSubmit={this.submit}>
+            <form className="form-update" onSubmit={this.submit}>
                 <h1 className="h3 mb-3 font-weight-normal">Update user</h1>
               
 
@@ -125,13 +125,13 @@ export  default class update extends React.Component<RouteComponentProps, IState
 
  */}
 
-<label htmlFor="inputPassword" className="sr-only">Old Password</label>
+{/* <label htmlFor="inputPassword" className="sr-only">Old Password</label>
                 <input type="password" id="inputPassword" 
                   
                     className="form-control" 
                     placeholder="Password"
                     onChange={this.handleChange}
-                    value={this.state.credentials.password} required />
+                    value={this.state.credentials.password} required /> */}
 
                 <label htmlFor="inputPassword" className="sr-only">new Password</label>
                 <input type="password" id="inputPassword" 
@@ -141,12 +141,16 @@ export  default class update extends React.Component<RouteComponentProps, IState
                     onChange={this.handleChange}
                     value={this.state.credentials.password} required />
                 {this.state.errorMessage && <p id="error-message">{this.state.errorMessage}</p>}
-                <button className="btn btn-lg btn-primary btn-block" type="submit">Update</button>
-                <a className="btn btn-lg btn-primary btn-block" href="/home/login" >Back To login</a>
-              
+                <button className="btn btn-lg btn-primary btn-block btn-success" type="submit">Update</button>
+                <a className="btn btn-lg btn-primary btn-block info" href="/home/login" >Back To login</a>
+       
+          
 {/*   
                 <p className="mt-5 mb-3 text-muted">&copy; 2017-2019</p> */}
             </form>
+
+
+
 
 
         );
