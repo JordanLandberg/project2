@@ -28,7 +28,7 @@ export default class ReviewQuestionComponent extends Component<{}, IState> {
             credentials: 'include'
         });
         const pendingQuestions = await resp.json();
-    console.log(pendingQuestions);
+
         let quiz: any[] = [];
         for (let i = 0; i < pendingQuestions.length; i++) { 
             const questionId = pendingQuestions[i].questionId;
@@ -69,7 +69,7 @@ approveQ = async (selectedQuestion: any) => {
     }
 
 denyQ = async (selectedQuestion: any) => {
-    console.log(selectedQuestion)
+    
         const body = {
             
             ...selectedQuestion,
