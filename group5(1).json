@@ -1,0 +1,131 @@
+{
+  "guide_type": [
+    {
+      "guide_type_name": "odn",
+      "division": [
+        {
+          "division_name": "SMN",
+          "pass": [
+            {
+              "paid": "PACK0001639516739570",
+              "series_title": "BTN Football in 60",
+              "ep_title": "2019: Penn State at Minnesota",
+              "season_num": "",
+              "ep_num": "53",
+              "playback": "PASSED",
+              "series_search_presence": "PASSED",
+              "ep_search_presence": "PASSED",
+              "details": "",
+              "slot": 13,
+              "url": "https://charter-testworkbench-com.s3.us-west-2.amazonaws.com/TMC_Screenshots/Odn_TMC CH VOD LA_13_2019_11_12_12_44_42.jpeg",
+              "error": ""
+            }
+          ],
+          "queue": [],
+          "fail": [
+            {
+              "paid": "PACK0001639516739570",
+              "series_title": "BTN Football in 60",
+              "ep_title": "2019: Penn State at Minnesota",
+              "season_num": "",
+              "ep_num": "53",
+              "playback": "FAILED",
+              "series_search_presence": "FAILED",
+              "ep_search_presence": "N/A",
+              "details": "Asset title not found in STB Search",
+              "slot": 3,
+              "url": "https://charter-testworkbench-com.s3.us-west-2.amazonaws.com/TMC_Screenshots/Odn_TMC CH VOD LA_3_2019_11_12_11_28_37.jpeg",
+              "error": ""
+            }
+          ],
+          "error": []
+        },
+        {
+          "division_name": "GRD",
+          "queue": [
+            {
+              "paid": "PACK0001639512131639",
+              "series_title": "BTN Football in 60",
+              "ep_title": "2019: Iowa at Wisconsin",
+              "season_num": "",
+              "ep_num": "55",
+              "playback": "PASSED",
+              "series_search_presence": "PASSED",
+              "ep_search_presence": "PASSED",
+              "details": "",
+              "slot": 11,
+              "url": "https://charter-testworkbench-com.s3.us-west-2.amazonaws.com/TMC_Screenshots/Odn_TMC CH VOD LA_11_2019_11_12_12_44_39.jpeg",
+              "error": ""
+            }
+          ],
+          "pass": [],
+          "fail": [],
+          "error": []
+        }
+      ]
+    },
+    {
+      "guide_type_name": "sg",
+      "division": [
+        {
+          "division_name": "SMN",
+          "queue": [],
+          "pass": [],
+          "fail": [
+            {
+              "paid": "PACK0001639512131639",
+              "series_title": "BTN Football in 60",
+              "ep_title": "2019: Iowa at Wisconsin",
+              "season_num": "",
+              "ep_num": "55",
+              "playback": "FAILED",
+              "series_search_presence": "PASSED",
+              "ep_search_presence": "FAILED",
+              "details": "Episode Not Found in Asset Episode list page",
+              "slot": 1,
+              "url": "https://charter-testworkbench-com.s3.us-west-2.amazonaws.com/TMC_Screenshots/sg_TMC South Man_1_2019_11_12_15_44_35.jpeg",
+              "error": ""
+            },
+            {
+              "paid": "PACK0001639514179559",
+              "series_title": "BTN Football in 60",
+              "ep_title": "2019: Maryland at Ohio State",
+              "season_num": "",
+              "ep_num": "54",
+              "playback": "FAILED",
+              "series_search_presence": "PASSED",
+              "ep_search_presence": "FAILED",
+              "details": "Episode Not Found in Asset Episode list page",
+              "slot": 16,
+              "url": "https://charter-testworkbench-com.s3.us-west-2.amazonaws.com/TMC_Screenshots/sg_TMC South Man_16_2019_11_12_15_44_43.jpeg",
+              "error": ""
+            }
+          ],
+          "error": []
+        },
+        {
+          "division_name": "GRD",
+          "queue": [],
+          "pass": [],
+          "fail": [
+            {
+              "paid": "PACK0001639516739570",
+              "series_title": "BTN Football in 60",
+              "ep_title": "2019: Penn State at Minnesota",
+              "season_num": "",
+              "ep_num": "53",
+              "playback": "FAILED",
+              "series_search_presence": "PASSED",
+              "ep_search_presence": "FAILED",
+              "details": "Episode Not Found in Asset Episode list page",
+              "slot": 5,
+              "url": "https://charter-testworkbench-com.s3.us-west-2.amazonaws.com/TMC_Screenshots/sg_TMC South Man_5_2019_11_12_15_44_22.jpeg",
+              "error": ""
+            }
+          ],
+          "error": []
+        }
+      ]
+    }
+  ]
+}
